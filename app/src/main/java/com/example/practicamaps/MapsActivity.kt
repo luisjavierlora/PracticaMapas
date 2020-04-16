@@ -41,13 +41,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setMarkers(
         latitud: String?,
         longitud: String?,
-        name: String?
+        name: String?,
+        seccio:String?
     ) {
         val marker = LatLng(latitud!!.toDouble(), longitud!!.toDouble())
         mMap.addMarker(
             MarkerOptions()
                 .position(marker)
                 .title(name)
+                .snippet(seccio)
         )
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 17.0F))
     }
@@ -56,14 +58,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
         val lati:String? = intent.getStringExtra("lati")
         val lon:String? = intent.getStringExtra("lon")
+        val name:String? = intent.getStringExtra("nombre")
+        val seccio:String = intent.getStringExtra("seccio")
+        setMarkers(lati,lon,name,seccio)
 
-        setMarkers(lati,lon,"UdeA")
-        """
-        //setMarkers("6.2677479","-75.5710303","UdeA Sede Principal")
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))"""
     }
 
 

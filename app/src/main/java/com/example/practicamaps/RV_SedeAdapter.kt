@@ -36,16 +36,17 @@ class RV_SedeAdapter(private val context: Context, private val sedesList: ArrayL
             itemView.tv_location.text=sede.location
 
             itemView.setOnClickListener {
-                goToMaps(sede.latitud,sede.longitud, it.context)
+                goToMaps(sede.latitud,sede.longitud, it.context,sede.nombre,sede.secional)
             }
         }
 
 
-        fun goToMaps(lati:String,lon: String,context: Context){
+        fun goToMaps(lati:String,lon: String,context: Context,name:String,seccio:String){
             val intent= Intent(context,MapsActivity::class.java)
             intent.putExtra("lati", lati)
             intent.putExtra("lon", lon)
-
+            intent.putExtra("nombre",name)
+            intent.putExtra("seccio",seccio)
             context.startActivity(intent)
         }
     }
